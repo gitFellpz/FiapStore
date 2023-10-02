@@ -55,9 +55,11 @@ public class CategoriaServlet extends HttpServlet {
 		case "listar":
 			listar(request, response);
 			break;
+			
 		case "abrir-form-cadastro":
 			abrirFormCadastro(request, response);
 			break;
+			
 		case "abrir-form-edicao":
 			abrirFormEdicao(request, response);
 			break;
@@ -77,8 +79,11 @@ public class CategoriaServlet extends HttpServlet {
 
 	private void abrirFormEdicao(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		int id = Integer.parseInt(request.getParameter("codigo"));
+		
 		Categoria categoria = dao.buscar(id);
+		
 		request.setAttribute("categoria", categoria);
 		carregarOpcoesCategoria(request);
 		request.getRequestDispatcher("edicao-categoria.jsp").forward(request, response);

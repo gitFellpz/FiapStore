@@ -29,13 +29,18 @@
 				<tr>
 					<td>${c.nome}</td>
 
-					<td><c:url value="categoria" var="link">
+					<td>
+						<c:url value="categoria" var="link">
 							<c:param name="acao" value="abrir-form-edicao" />
 							<c:param name="codigo" value="${c.codigo }" />
+							
 						</c:url> <a href="${link}" class="btn btn-primary btn-xs">Editar</a>
+						
 						<button type="button" class="btn btn-danger btn-xs"
 							data-toggle="modal" data-target="#excluirModal"
-							onclick="codigoExcluir.value = ${c.codigo}">Excluir</button></td>
+							onclick="codigoExcluir.value = ${c.codigo}">Excluir</button>
+					</td>
+					
 				</tr>
 			</c:forEach>
 		</table>
