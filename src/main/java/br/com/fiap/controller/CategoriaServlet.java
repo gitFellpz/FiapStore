@@ -84,7 +84,7 @@ public class CategoriaServlet extends HttpServlet {
 		
 		Categoria categoria = dao.buscar(id);
 		
-		System.out.println(categoria);
+		System.out.println(categoria.getNome());
 		
 		request.setAttribute("categoria", categoria);
 		carregarOpcoesCategoria(request);
@@ -127,8 +127,7 @@ public class CategoriaServlet extends HttpServlet {
 			int codigo = Integer.parseInt(request.getParameter("codigo"));
 			String nome = request.getParameter("nome");
 
-			Categoria categoria = new Categoria();
-			categoria.setNome(nome);
+			Categoria categoria = new Categoria(codigo, nome);
 
 			dao.atualizar(categoria);
 

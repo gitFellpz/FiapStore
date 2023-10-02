@@ -4,7 +4,6 @@ import java.util.List;
 
 import br.com.fiap.exception.DBException;
 import br.com.fiap.model.Categoria;
-import br.com.fiap.model.Produto;
 
 public interface CategoriaDAO {
 

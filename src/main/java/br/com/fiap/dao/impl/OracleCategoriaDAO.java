@@ -5,14 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import br.com.fiap.connection.ConnectionManager;
 import br.com.fiap.dao.CategoriaDAO;
 import br.com.fiap.exception.DBException;
 import br.com.fiap.model.Categoria;
-import br.com.fiap.model.Produto;
 
 public class OracleCategoriaDAO implements CategoriaDAO {
 
@@ -50,9 +48,10 @@ public class OracleCategoriaDAO implements CategoriaDAO {
 
 		try {
 			conexao = ConnectionManager.getInstance().getConnection();
-			String sql = "UPDATE TB_CATEGORIAS SET NOME_CATEGORIA = ?";
+			String sql = "UPDATE TB_CATEGORIAS SET NOME_CATEGORIA = ? WHERE ID_CATEGORIA = ?";
 			stmt = conexao.prepareStatement(sql);
 			stmt.setString(1, categoria.getNome());
+			stmt.setInt(2, categoria.getCodigo());
 
 			stmt.execute();
 			
@@ -112,7 +111,6 @@ public class OracleCategoriaDAO implements CategoriaDAO {
 			if (rs.next()) {
 				int codigo = rs.getInt("ID_CATEGORIA");
 				String nome = rs.getString("NOME_CATEGORIA");
-
 
 				categoria = new Categoria(codigo, nome);
 			}
