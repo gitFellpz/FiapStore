@@ -12,9 +12,12 @@
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item"><a class="nav-link"
-				href="produto?acao=abrir-form-cadastro">Cadastro</a></li>
+				href="produto?acao=abrir-form-cadastro">Cadastro de Produtos</a></li>
 			<li class="nav-item"><a class="nav-link"
 				href="produto?acao=listar">Produtos</a></li>
+				
+			<li class="nav-item"><a class="nav-link"
+				href="categoria?acao=abrir-form-cadastro">Cadastro de Categorias</a></li>
 		</ul>
 		<c:if test="${empty user}">
 			<span class="navbar-text text-danger" style="margin-left:auto" >

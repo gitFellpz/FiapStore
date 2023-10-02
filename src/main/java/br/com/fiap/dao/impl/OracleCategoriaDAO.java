@@ -174,6 +174,7 @@ public class OracleCategoriaDAO implements CategoriaDAO {
 		List<Categoria> lista = new ArrayList<Categoria>();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
+		
 		try {
 			conexao = ConnectionManager.getInstance().getConnection();
 			stmt = conexao.prepareStatement("SELECT * FROM TB_CATEGORIAS");
@@ -186,9 +187,12 @@ public class OracleCategoriaDAO implements CategoriaDAO {
 				Categoria categoria = new Categoria(codigo, nome);
 				lista.add(categoria);
 			}
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
+		
+		} 
+		finally {
 			try {
 				stmt.close();
 				rs.close();
@@ -197,6 +201,7 @@ public class OracleCategoriaDAO implements CategoriaDAO {
 				e.printStackTrace();
 			}
 		}
+		
 		return lista;
 	}
 }
