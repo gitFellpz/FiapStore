@@ -28,10 +28,13 @@ public class OracleProdutoDAO implements ProdutoDAO {
 			stmt.setString(1, produto.getNome());
 			stmt.setInt(2, produto.getQuantidade());
 			stmt.setDouble(3, produto.getValor());
+			
 			java.sql.Date data = new java.sql.Date(produto.getDataFabricacao().getTimeInMillis());
 			stmt.setDate(4, data);
+			
 			stmt.setInt(5, produto.getCategoria().getCodigo());
 			stmt.execute();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DBException("Erro ao cadastrar.");
