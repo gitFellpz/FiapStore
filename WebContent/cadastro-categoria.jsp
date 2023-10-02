@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Cadastro de Produto</title>
+<title>Cadastro de Categoria</title>
 <%@ include file="header.jsp"%>
 </head>
 <body>

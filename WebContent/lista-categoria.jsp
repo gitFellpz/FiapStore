@@ -6,40 +6,41 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Lista de Categorias</title>
+<title>Lista de Produto</title>
 <%@ include file="header.jsp"%>
 </head>
 <body>
 
 	<%@ include file="menu.jsp"%>
 	<div class="container">
-		<h1>Categorias</h1>
-		
+		<h1>Produtos</h1>
 		<c:if test="${not empty msg }">
 			<div class="alert alert-success">${msg}</div>
 		</c:if>
-		
 		<c:if test="${not empty erro }">
 			<div class="alert alert-danger">${erro}</div>
 		</c:if>
-		
 		<table class="table table-striped">
 			<tr>
-				<th>Nome da Categoria</th>
+				<th>Nome</th>
+				<th>Quantidade</th>
+				<th>Valor</th>
+				<th>Data de Fabricação</th>
+				<th>Categoria</th>
 				<th></th>
 			</tr>
-			
-			<c:forEach items="${categorias}" var="p">
+			<c:forEach items="${produtos }" var="p">
 				<tr>
 					<td>${p.nome}</td>
-					
-					<td>
-						<c:url value="categoria" var="link">
+					<td>${p.quantidade}</td>
+					<td>${p.valor}</td>
+					<td><fmt:formatDate value="${p.dataFabricacao.time }"
+							pattern="dd/MM/yyyy" /></td>
+					<td>${p.categoria.nome}</td>
+					<td><c:url value="produto" var="link">
 							<c:param name="acao" value="abrir-form-edicao" />
 							<c:param name="codigo" value="${p.codigo }" />
-							
 						</c:url> <a href="${link}" class="btn btn-primary btn-xs">Editar</a>
-						
 						<button type="button" class="btn btn-danger btn-xs"
 							data-toggle="modal" data-target="#excluirModal"
 							onclick="codigoExcluir.value = ${p.codigo}">Excluir</button></td>
@@ -62,9 +63,9 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body">Deseja realmente excluir a categoria?</div>
+				<div class="modal-body">Deseja realmente excluir o produto?</div>
 				<div class="modal-footer">
-					<form action="categoia" method="post">
+					<form action="produto" method="post">
 						<input type="hidden" name="acao" value="excluir"> <input
 							type="hidden" name="codigo" id="codigoExcluir">
 						<button type="button" class="btn btn-secondary"
