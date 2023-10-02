@@ -28,14 +28,17 @@ public class OracleCategoriaDAO implements CategoriaDAO {
 			stmt.setString(1, categoria.getNome());
 			stmt.execute();
 			
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) {
 			e.printStackTrace();
 			throw new DBException("Erro ao cadastrar.");
-		} finally {
+		} 
+		finally {
 			try {
 				stmt.close();
 				conexao.close();
-			} catch (SQLException e) {
+			} 
+			catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
