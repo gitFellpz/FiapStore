@@ -1,8 +1,6 @@
 package br.com.fiap.controller;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,11 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.fiap.dao.CategoriaDAO;
-import br.com.fiap.dao.ProdutoDAO;
 import br.com.fiap.exception.DBException;
 import br.com.fiap.factory.DAOFactory;
 import br.com.fiap.model.Categoria;
-import br.com.fiap.model.Produto;
 
 @WebServlet("/categoria")
 public class CategoriaServlet extends HttpServlet {
@@ -90,7 +86,7 @@ public class CategoriaServlet extends HttpServlet {
 
 	private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Categoria> lista = dao.listar();
-		request.setAttribute("categoias", lista);
+		request.setAttribute("categorias", lista);
 		request.getRequestDispatcher("lista-categoria.jsp").forward(request, response);
 	}
 
@@ -104,7 +100,7 @@ public class CategoriaServlet extends HttpServlet {
 
 			dao.cadastrar(categoria);
 
-			request.setAttribute("msg", "Produto cadastrado!");
+			request.setAttribute("msg", "Categoria cadastrado!");
 		} 
 		catch (DBException db) {
 			db.printStackTrace();
@@ -128,7 +124,7 @@ public class CategoriaServlet extends HttpServlet {
 
 			dao.atualizar(categoria);
 
-			request.setAttribute("msg", "Produto atualizado!");
+			request.setAttribute("msg", "Categoria atualizado!");
 		} 
 		catch (DBException db) {
 			db.printStackTrace();
@@ -144,14 +140,18 @@ public class CategoriaServlet extends HttpServlet {
 
 	private void excluir(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		int codigo = Integer.parseInt(request.getParameter("codigo"));
+		
 		try {
 			dao.remover(codigo);
-			request.setAttribute("msg", "Produto removido!");
-		} catch (DBException e) {
+			request.setAttribute("msg", "Categoria removida!");
+		} 
+		catch (DBException e) {
 			e.printStackTrace();
 			request.setAttribute("erro", "Erro ao atualizar");
 		}
+		
 		listar(request, response);
 	}
 

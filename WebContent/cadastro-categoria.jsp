@@ -18,7 +18,7 @@
 		<c:if test="${not empty erro }">
 			<div class="alert alert-danger">${erro}</div>
 		</c:if>
-		<form action="produto" method="post">
+		<form action="categoria" method="post">
 		
 			<input type="hidden" value="cadastrar" name="acao">
 			
