@@ -84,10 +84,13 @@ public class CategoriaServlet extends HttpServlet {
 		
 		Categoria categoria = dao.buscar(id);
 		
+		System.out.println(categoria);
+		
 		request.setAttribute("categoria", categoria);
 		carregarOpcoesCategoria(request);
 		request.getRequestDispatcher("edicao-categoria.jsp").forward(request, response);
 	}
+	
 
 	private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Categoria> lista = dao.listar();

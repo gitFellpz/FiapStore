@@ -12,16 +12,18 @@
 <body>
 	<%@ include file="menu.jsp"%>
 	<div class="container">
+	
 		<h1>Edição de Categoria</h1>
 		
 		<form action="categoria" method="post">
 		
-			<input type="hidden" value="editar" name="acao"> <input
-				type="hidden" value="${categoria.codigo }" name="codigo">
+			<input type="hidden" value="editar" name="acao"> 
+			
+			<input type="hidden" value="${categoria.codigo}" name="codigo">
 				
 			<div class="form-group">
-				<label for="id-nome">Nome</label> <input type="text" name="nome"
-					id="id-nome" class="form-control" value="${categoria.nome }">
+				<label for="id-nome">Nome</label> 
+				<input type="text" name="nome" id="id-nome" class="form-control" value="${categoria.nome}">
 			</div>
 			
 			<br>

@@ -111,7 +111,7 @@ public class OracleCategoriaDAO implements CategoriaDAO {
 
 			if (rs.next()) {
 				int codigo = rs.getInt("ID_CATEGORIA");
-				String nome = rs.getString("NOME_CATGORIA");
+				String nome = rs.getString("NOME_CATEGORIA");
 
 
 				categoria = new Categoria(codigo, nome);
