@@ -9,5 +9,7 @@ public interface CategoriaDAO {
 
 	List<Categoria> listar();
 	void cadastrar(Categoria categoria) throws DBException;
+	void atualizar(Categoria categoria) throws DBException;
+	void remover(int codigo) throws DBException;
 
 }

@@ -76,18 +76,22 @@ public class OracleCategoriaDAO implements CategoriaDAO {
 		PreparedStatement stmt = null;
 		try {
 			conexao = ConnectionManager.getInstance().getConnection();
-			String sql = "DELETE FROM TB_PRODUTOS WHERE ID_PRODUTO = ?";
+			String sql = "DELETE FROM TB_CATEGORIAS WHERE ID_CATEGORIA = ?";
 			stmt = conexao.prepareStatement(sql);
 			stmt.setInt(1, codigo);
 			stmt.execute();
-		} catch (SQLException e) {
+			
+		} 
+		catch (SQLException e) {
 			e.printStackTrace();
 			throw new DBException("Erro ao remover.");
-		} finally {
+		} 
+		finally {
 			try {
 				stmt.close();
 				conexao.close();
-			} catch (SQLException e) {
+			} 
+			catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
