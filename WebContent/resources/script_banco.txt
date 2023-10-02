@@ -1,0 +1,53 @@
+drop table tb_produtos;
+drop table tb_categorias;
+drop table tb_user;
+drop sequence SQ_ID_PRODUTO;
+drop sequence SQ_ID_CATEGORIA;
+
+create table tb_categorias(
+id_categoria number not null primary key,
+nome_categoria varchar2(45));
+
+create table tb_produtos (
+id_produto number not null primary key,
+nome_produto varchar2(100),
+valor number,
+dt_fabricacao date,
+quantidade number,
+id_categoria number, 
+foreign key (id_categoria) references tb_categorias(id_categoria));
+
+create table tb_user (
+email varchar2(45) not null primary key,
+senha varchar2(45) not null
+);
+
+insert into tb_user(email, senha) values ('teste@fiap.com.br', 'e10adc3949ba59abbe56e057f20f883e');
+
+create sequence SQ_ID_PRODUTO start with 1 INCREMENT by 1;
+create sequence SQ_ID_CATEGORIA start with 1 INCREMENT by 1;
+
+CREATE OR REPLACE TRIGGER TR_INS_PRODUTO
+BEFORE INSERT ON tb_produtos FOR EACH ROW       
+BEGIN
+  SELECT SQ_ID_PRODUTO.nextval
+  INTO :NEW.id_produto
+  FROM DUAL;
+END;
+/
+
+CREATE OR REPLACE TRIGGER TR_INS_CATEGORIA
+BEFORE INSERT ON tb_categorias FOR EACH ROW       
+BEGIN
+  SELECT SQ_ID_CATEGORIA.nextval
+  INTO :NEW.id_categoria
+  FROM DUAL;
+END;
+/
+
+insert into tb_categorias (nome_categoria) values ('Eletrônicos');
+insert into tb_categorias (nome_categoria) values ('Alimentos');
+insert into tb_categorias (nome_categoria) values ('Brinquedos');
+insert into tb_categorias (nome_categoria) values ('Vestuário');
+
+COMMIT;
