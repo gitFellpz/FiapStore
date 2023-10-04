@@ -14,7 +14,7 @@ public interface MarcaDAO {
 	void remover(int codigo) throws DBException;
 
 	Marca buscar(int id);
-
+	
 	List<Marca> listar();
 
 }

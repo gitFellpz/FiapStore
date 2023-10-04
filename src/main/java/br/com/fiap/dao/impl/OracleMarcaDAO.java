@@ -10,20 +10,20 @@ import java.util.List;
 import br.com.fiap.connection.ConnectionManager;
 import br.com.fiap.dao.MarcaDAO;
 import br.com.fiap.exception.DBException;
-import br.com.fiap.model.Categoria;
+import br.com.fiap.model.Marca;
 
 public class OracleMarcaDAO implements MarcaDAO {
 
 	private Connection conexao;
 	
 	@Override
-	public void cadastrar(Categoria categoria) throws DBException {
+	public void cadastrar(Marca marca) throws DBException {
 		PreparedStatement stmt = null;
 		try {
 			conexao = ConnectionManager.getInstance().getConnection();
-			String sql = "INSERT INTO TB_CATEGORIAS (NOME_CATEGORIA) VALUES (?)";
+			String sql = "INSERT INTO TB_MARCAS (NOME_MARCA) VALUES (?)";
 			stmt = conexao.prepareStatement(sql);
-			stmt.setString(1, categoria.getNome());
+			stmt.setString(1, marca.getNome());
 			stmt.execute();
 			
 		} 
@@ -43,15 +43,15 @@ public class OracleMarcaDAO implements MarcaDAO {
 	}
 
 	@Override
-	public void atualizar(Categoria categoria) throws DBException {
+	public void atualizar(Marca marca) throws DBException {
 		PreparedStatement stmt = null;
 
 		try {
 			conexao = ConnectionManager.getInstance().getConnection();
-			String sql = "UPDATE TB_CATEGORIAS SET NOME_CATEGORIA = ? WHERE ID_CATEGORIA = ?";
+			String sql = "UPDATE TB_MARCAS SET NOME_MARCA = ? WHERE ID_MARCA = ?";
 			stmt = conexao.prepareStatement(sql);
-			stmt.setString(1, categoria.getNome());
-			stmt.setInt(2, categoria.getCodigo());
+			stmt.setString(1, marca.getNome());
+			stmt.setInt(2, marca.getCodigo());
 
 			stmt.execute();
 			
@@ -75,11 +75,10 @@ public class OracleMarcaDAO implements MarcaDAO {
 		PreparedStatement stmt = null;
 		try {
 			conexao = ConnectionManager.getInstance().getConnection();
-			String sql = "DELETE FROM TB_CATEGORIAS WHERE ID_CATEGORIA = ?";
+			String sql = "DELETE FROM TB_MARCAS WHERE ID_MARCA = ?";
 			stmt = conexao.prepareStatement(sql);
 			stmt.setInt(1, codigo);
 			stmt.execute();
-			
 		} 
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -97,22 +96,22 @@ public class OracleMarcaDAO implements MarcaDAO {
 	}
 
 	@Override
-	public Categoria buscar(int id) {
-		Categoria categoria = null;
+	public Marca buscar(int id) {
+		Marca marca = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		try {
 			conexao = ConnectionManager.getInstance().getConnection();
 			stmt = conexao.prepareStatement(
-					"SELECT * FROM TB_CATEGORIAS WHERE ID_CATEGORIA = ?");
+					"SELECT * FROM TB_MARCAS WHERE ID_MARCA = ?");
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
 
 			if (rs.next()) {
-				int codigo = rs.getInt("ID_CATEGORIA");
-				String nome = rs.getString("NOME_CATEGORIA");
+				int codigo = rs.getInt("ID_MARCA");
+				String nome = rs.getString("NOME_MARCA");
 
-				categoria = new Categoria(codigo, nome);
+				marca = new Marca(codigo, nome);
 			}
 
 		} 
@@ -130,28 +129,28 @@ public class OracleMarcaDAO implements MarcaDAO {
 				e.printStackTrace();
 			}
 		}
-		return categoria;
+		return marca;
 	}
 
 
 
 	@Override
-	public List<Categoria> listar() {
-		List<Categoria> lista = new ArrayList<Categoria>();
+	public List<Marca> listar() {
+		List<Marca> lista = new ArrayList<Marca>();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		
 		try {
 			conexao = ConnectionManager.getInstance().getConnection();
-			stmt = conexao.prepareStatement("SELECT * FROM TB_CATEGORIAS");
+			stmt = conexao.prepareStatement("SELECT * FROM TB_MARCAS");
 			rs = stmt.executeQuery();
 
 			// Percorre todos os registros encontrados
 			while (rs.next()) {
-				int codigo = rs.getInt("ID_CATEGORIA");
-				String nome = rs.getString("NOME_CATEGORIA");
-				Categoria categoria = new Categoria(codigo, nome);
-				lista.add(categoria);
+				int codigo = rs.getInt("ID_MARCA");
+				String nome = rs.getString("NOME_MARCA");
+				Marca marca = new Marca(codigo, nome);
+				lista.add(marca);
 			}
 		} 
 		catch (SQLException e) {
