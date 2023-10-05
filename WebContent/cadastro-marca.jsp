@@ -5,21 +5,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Cadastro de Categoria</title>
+<title>Cadastro de Marca</title>
 <%@ include file="header.jsp"%>
 </head>
 <body>
 	<%@ include file="menu.jsp"%>
 	<div class="container">
-		<h1>Cadastro de Categoria</h1>
+	
+		<h1>Cadastro de Marca</h1>
+		
 		<c:if test="${not empty msg }">
 			<div class="alert alert-success">${msg}</div>
 		</c:if>
+	
 		<c:if test="${not empty erro }">
 			<div class="alert alert-danger">${erro}</div>
 		</c:if>
-		<form action="categoria" method="post">
 		
+		<form action="marca" method="post">
 			<input type="hidden" value="cadastrar" name="acao">
 			
 			<div class="form-group">

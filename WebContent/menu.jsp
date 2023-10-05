@@ -11,21 +11,29 @@
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item"><a class="nav-link"
-				href="produto?acao=abrir-form-cadastro">Cadastro de Produtos</a>
-				
+		
+			<li class="nav-item">
+				<a class="nav-link" href="produto?acao=abrir-form-cadastro">Cadastro de Produtos</a>
 			</li>
 			
-			<li class="nav-item"><a class="nav-link"
-				href="produto?acao=listar">Produtos</a>
+			<li class="nav-item">
+				<a class="nav-link" href="produto?acao=listar">Produtos</a>
 			</li>
 				
-			<li class="nav-item"><a class="nav-link"
-				href="categoria?acao=abrir-form-cadastro">Cadastro de Categorias</a>
+			<li class="nav-item">
+				<a class="nav-link" href="categoria?acao=abrir-form-cadastro">Cadastro de Categorias</a>
 			</li>
 			
-			<li class="nav-item"><a class="nav-link"
-				href="categoria?acao=listar">Categorias</a>
+			<li class="nav-item">
+				<a class="nav-link" href="categoria?acao=listar">Categorias</a>
+			</li>
+			
+			<li class="nav-item">
+				<a class="nav-link" href="marca?acao=abrir-form-cadastro">Cadastro de Marcas</a>
+			</li>
+			
+			<li class="nav-item">
+				<a class="nav-link" href="marca?acao=listar">Marcas</a>
 			</li>
 		</ul>
 		<c:if test="${empty user}">
