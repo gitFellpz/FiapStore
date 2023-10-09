@@ -35,6 +35,7 @@
 					class="form-control"
 					value='<fmt:formatDate value="${produto.dataFabricacao.time }" pattern="dd/MM/yyyy"/>'>
 			</div>
+			
 			<div class="form-group">
 				<label for="id-categoria">Categoria</label> <select name="categoria"
 					id="id-categoria" class="form-control">
@@ -49,6 +50,23 @@
 					</c:forEach>
 				</select>
 			</div>
+			
+			<div class="form-group">
+				<label for="id-marca">Marca</label> <select name="marca"
+					id="id-marca" class="form-control">
+					<option value="0">Selecione</option>
+					<c:forEach items="${marcas}" var="m">
+						<c:if test="${m.codigo == produto.marca.codigo }">
+							<option value="${m.codigo }" selected>${m.nome }</option>
+						</c:if>
+						<c:if test="${m.codigo != produto.marca.codigo }">
+							<option value="${m.codigo }">${m.nome }</option>
+						</c:if>
+					</c:forEach>
+				</select>
+			</div>
+			
+			
 			<br>
 			<input type="submit" value="Salvar" class="btn btn-primary">
 			<a href="produto?acao=listar" class="btn btn-danger">Cancelar</a>

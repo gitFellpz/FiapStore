@@ -152,7 +152,7 @@ public class MarcaServlet extends HttpServlet {
 		
 		try {
 			dao.remover(codigo);
-			request.setAttribute("msg", "Categoria removida!");
+			request.setAttribute("msg", "Marca removida!");
 		} 
 		catch (DBException e) {
 			e.printStackTrace();

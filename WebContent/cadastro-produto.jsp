@@ -37,6 +37,7 @@
 					type="text" name="fabricacao" id="id-fabricacao"
 					class="form-control">
 			</div>
+			
 			<div class="form-group">
 				<label for="id-categoria">Categoria</label> <select name="categoria"
 					id="id-categoria" class="form-control">
@@ -46,6 +47,17 @@
 					</c:forEach>
 				</select>
 			</div>
+
+			<div class="form-group">
+				<label for="id-marca">Marca</label> 
+				<select name="marca" id="id-marca" class="form-control">
+					<option value="0">Selecione</option>
+					<c:forEach items="${marcas}" var="m">
+						<option value="${m.codigo}">${m.nome}</option>
+					</c:forEach>
+				</select>
+			</div>
+			
 			<br>
 			<input type="submit" value="Salvar" class="btn btn-primary">
 		</form>

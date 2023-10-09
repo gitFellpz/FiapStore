@@ -12,10 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.fiap.dao.CategoriaDAO;
+import br.com.fiap.dao.MarcaDAO;
 import br.com.fiap.dao.ProdutoDAO;
 import br.com.fiap.exception.DBException;
 import br.com.fiap.factory.DAOFactory;
 import br.com.fiap.model.Categoria;
+import br.com.fiap.model.Marca;
 import br.com.fiap.model.Produto;
 
 @WebServlet("/produto")
@@ -25,12 +27,14 @@ public class ProdutoServlet extends HttpServlet {
 
 	private ProdutoDAO dao;
 	private CategoriaDAO categoriaDao;
+	private MarcaDAO marcaDao;
 
 	@Override
 	public void init() throws ServletException {
 		super.init();
 		dao = DAOFactory.getProdutoDAO();
 		categoriaDao = DAOFactory.getCategoriaDAO();
+		marcaDao = DAOFactory.getMarcaDAO();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -61,6 +65,9 @@ public class ProdutoServlet extends HttpServlet {
 		case "listar":
 			listar(request, response);
 			break;
+		case "listar-menu":
+			listar2(request, response);
+			break;
 		case "abrir-form-cadastro":
 			abrirFormCadastro(request, response);
 			break;
@@ -72,7 +79,10 @@ public class ProdutoServlet extends HttpServlet {
 
 	private void abrirFormCadastro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		carregarOpcoesCategoria(request);
+		carregarOpcoesMarca(request);
+		
 		request.getRequestDispatcher("cadastro-produto.jsp").forward(request, response);
 	}
 
@@ -80,13 +90,21 @@ public class ProdutoServlet extends HttpServlet {
 		List<Categoria> lista = categoriaDao.listar();
 		request.setAttribute("categorias", lista);
 	}
+	
+	private void carregarOpcoesMarca(HttpServletRequest request) {
+		List<Marca> lista = marcaDao.listar();
+		request.setAttribute("marcas", lista);
+	}
 
 	private void abrirFormEdicao(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("codigo"));
 		Produto produto = dao.buscar(id);
 		request.setAttribute("produto", produto);
+		
 		carregarOpcoesCategoria(request);
+		carregarOpcoesMarca(request);
+		
 		request.getRequestDispatcher("edicao-produto.jsp").forward(request, response);
 	}
 
@@ -94,6 +112,13 @@ public class ProdutoServlet extends HttpServlet {
 		List<Produto> lista = dao.listar();
 		request.setAttribute("produtos", lista);
 		request.getRequestDispatcher("lista-produto.jsp").forward(request, response);
+	}
+	
+	private void listar2(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<Produto> lista = dao.listar();
+		request.setAttribute("produtos", lista);
+		System.out.println(lista.get(0).getNome());
+		request.getRequestDispatcher("home.jsp").forward(request, response);
 	}
 
 	private void cadastrar(HttpServletRequest request, HttpServletResponse response)
@@ -106,12 +131,17 @@ public class ProdutoServlet extends HttpServlet {
 			Calendar fabricacao = Calendar.getInstance();
 			fabricacao.setTime(format.parse(request.getParameter("fabricacao")));
 			int codigoCategoria = Integer.parseInt(request.getParameter("categoria"));
+			int codigoMarca = Integer.parseInt(request.getParameter("marca"));
 
 			Categoria categoria = new Categoria();
 			categoria.setCodigo(codigoCategoria);
+			
+			Marca marca = new Marca();
+			marca.setCodigo(codigoMarca);
 
 			Produto produto = new Produto(nome, preco, fabricacao, quantidade);
 			produto.setCategoria(categoria);
+			produto.setMarca(marca);
 
 			dao.cadastrar(produto);
 
@@ -136,12 +166,17 @@ public class ProdutoServlet extends HttpServlet {
 			Calendar fabricacao = Calendar.getInstance();
 			fabricacao.setTime(format.parse(request.getParameter("fabricacao")));
 			int codigoCategoria = Integer.parseInt(request.getParameter("categoria"));
+			int codigoMarca = Integer.parseInt(request.getParameter("marca"));
 
 			Categoria categoria = new Categoria();
 			categoria.setCodigo(codigoCategoria);
+			
+			Marca marca = new Marca();
+			marca.setCodigo(codigoMarca);
 
 			Produto produto = new Produto(nome, preco, fabricacao, quantidade);
 			produto.setCategoria(categoria);
+			produto.setMarca(marca);
 			produto.setCodigo(codigo);
 			dao.atualizar(produto);
 

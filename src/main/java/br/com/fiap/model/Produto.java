@@ -10,6 +10,7 @@ public class Produto {
 	private Calendar dataFabricacao;
 	private int quantidade;
 	private Categoria categoria;
+	private Marca marca;
 
 	public Produto() {
 		super();
@@ -70,5 +71,15 @@ public class Produto {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+
+	public Marca getMarca() {
+		return marca;
+	}
+
+	public void setMarca(Marca marca) {
+		this.marca = marca;
+	}
+	
+	
 
 }
